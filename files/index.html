@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spam Classifier — Neural Network</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+</head>
+<body>
+
+  <div class="app">
+
+    <!-- Header -->
+    <div class="header">
+      <div class="logo">
+        <i class="ti ti-shield-check"></i>
+      </div>
+      <div class="header-text">
+        <h1>Spam Classifier</h1>
+        <p>Neural Network &middot; TF-IDF &middot; Indian Rupee Aware</p>
+      </div>
+    </div>
+
+    <!-- Session Stats -->
+    <div class="stats-row">
+      <div class="stat">
+        <div class="stat-val" id="totalCount">0</div>
+        <div class="stat-lbl">Messages checked</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val spam-val" id="spamCount">0</div>
+        <div class="stat-lbl">Spam detected</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val ham-val" id="hamCount">0</div>
+        <div class="stat-lbl">Legitimate</div>
+      </div>
+    </div>
+
+    <!-- Sample Pills -->
+    <div class="quick-label">Try a sample message</div>
+    <div class="quick-pills">
+      <span class="pill spam-pill" onclick="loadSample(this)">₹83,00,000 lottery win — claim now!</span>
+      <span class="pill spam-pill" onclick="loadSample(this)">Earn ₹40,000/week from home guaranteed</span>
+      <span class="pill spam-pill" onclick="loadSample(this)">URGENT: Your SBI account is suspended</span>
+      <span class="pill spam-pill" onclick="loadSample(this)">Free ₹2,000 Flipkart gift card — fill survey</span>
+      <span class="pill ham-pill"  onclick="loadSample(this)">Meeting rescheduled to Thursday 3pm</span>
+      <span class="pill ham-pill"  onclick="loadSample(this)">Quarterly report attached for your review</span>
+      <span class="pill ham-pill"  onclick="loadSample(this)">Your package was delivered at 3:42pm</span>
+    </div>
+
+    <!-- Input Card -->
+    <div class="input-card">
+      <div class="input-label">
+        <i class="ti ti-message"></i> Enter message
+      </div>
+      <textarea
+        id="msgInput"
+        placeholder="Type or paste a message… e.g. 'Congratulations! You've won ₹10,00,000!'"
+        oninput="updateChar()"
+      ></textarea>
+      <div class="char-count"><span id="charCount">0</span> characters</div>
+      <div class="btn-row">
+        <button class="btn-analyze" id="analyzeBtn" onclick="analyze()">
+          <i class="ti ti-search"></i> Analyse Message
+        </button>
+        <button class="btn-clear" onclick="clearAll()">Clear</button>
+      </div>
+    </div>
+
+    <!-- Result Card -->
+    <div id="resultArea" class="hidden">
+      <div id="resultCard" class="result-card">
+        <div class="result-header">
+          <div id="verdictBadge" class="verdict-badge"></div>
+          <div class="confidence-text" id="confText"></div>
+        </div>
+
+        <div class="prob-row">
+          <span class="prob-label">Ham</span>
+          <div class="prob-track">
+            <div class="prob-fill ham-fill" id="hamBar" style="width:0%"></div>
+          </div>
+          <span class="prob-pct ham-pct" id="hamPct">0%</span>
+        </div>
+        <div class="prob-row">
+          <span class="prob-label">Spam</span>
+          <div class="prob-track">
+            <div class="prob-fill spam-fill" id="spamBar" style="width:0%"></div>
+          </div>
+          <span class="prob-pct spam-pct" id="spamPct">0%</span>
+        </div>
+
+        <div class="tokens-section">
+          <div class="tokens-label">Signal tokens detected</div>
+          <div class="token-chips" id="tokenChips"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- History -->
+    <div class="history-section" id="historySection" style="display:none">
+      <div class="history-label">
+        Recent analyses
+        <button class="history-clear" onclick="clearHistory()">Clear history</button>
+      </div>
+      <div class="history-list" id="historyList"></div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      Model: MLP Neural Network &nbsp;&bull;&nbsp; Vectorizer: TF-IDF (5,000 features, bigrams)
+      &nbsp;&bull;&nbsp; Accuracy: 92% &nbsp;&bull;&nbsp; ROC-AUC: 1.00
+    </div>
+
+  </div>
+
+  <script src="classifier.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
