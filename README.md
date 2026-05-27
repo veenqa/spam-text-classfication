@@ -1,8 +1,8 @@
-#Spam Classifier — Neural Network + TF-IDF
+Spam Classifier — Neural Network + TF-IDF
    
-     A spam/ham message classifier with a clean browser UI, trained on Indian Rupee (₹) aware spam patterns.
+     A spam/ ham message classifier with a clean browser UI, trained on Indian Rupee (₹) aware spam patterns.
 
-#Features
+Features
 
   Neural Network classifier (MLP: 256 → 128 → 64, ReLU, Adam)
   TF-IDF vectorisation (5,000 features, bigrams, sublinear TF)
